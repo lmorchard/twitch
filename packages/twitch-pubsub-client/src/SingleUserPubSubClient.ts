@@ -11,6 +11,7 @@ import PubSubMessage from './Messages/PubSubMessage';
 import PubSubRedemptionMessage, { PubSubRedemptionMessageData } from './Messages/PubSubRedemptionMessage';
 import PubSubSubscriptionMessage, { PubSubSubscriptionMessageData } from './Messages/PubSubSubscriptionMessage';
 import PubSubWhisperMessage, { PubSubWhisperMessageData } from './Messages/PubSubWhisperMessage';
+import PubSubFollowingMessage, { PubSubFollowingMessageData } from './Messages/PubSubFollowingMessage';
 import PubSubListener from './PubSubListener';
 
 /**
@@ -94,6 +95,13 @@ export default class SingleUserPubSubClient {
 						message = new PubSubWhisperMessage(messageData as PubSubWhisperMessageData, this._twitchClient);
 						break;
 					}
+					case 'following': {
+						message = new PubSubFollowingMessage(
+							messageData as PubSubFollowingMessageData,
+							this._twitchClient
+						);
+						break;
+					}
 					default:
 						return;
 				}
@@ -169,6 +177,17 @@ export default class SingleUserPubSubClient {
 	 */
 	async onModAction(channelId: UserIdResolvable, callback: (message: PubSubChatModActionMessage) => void) {
 		return this._addListener('chat_moderator_actions', callback, 'channel:moderate', extractUserId(channelId));
+	}
+
+	/**
+	 * Adds a listener to following events to the client.
+	 *
+	 * @param callback A function to be called when a following event happens in the user's channel.
+	 *
+	 * It receives a {@PubSubFollowingMessage} object.
+	 */
+	async onFollowing(callback: (message: PubSubFollowingMessage) => void) {
+		return this._addListener('following', callback);
 	}
 
 	/**

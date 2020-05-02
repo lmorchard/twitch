@@ -7,6 +7,7 @@ import PubSubChatModActionMessage from './Messages/PubSubChatModActionMessage';
 import PubSubRedemptionMessage from './Messages/PubSubRedemptionMessage';
 import PubSubSubscriptionMessage from './Messages/PubSubSubscriptionMessage';
 import PubSubWhisperMessage from './Messages/PubSubWhisperMessage';
+import PubSubFollowingMessage from './Messages/PubSubFollowingMessage';
 import SingleUserPubSubClient from './SingleUserPubSubClient';
 
 export default class PubSubClient {
@@ -61,6 +62,10 @@ export default class PubSubClient {
 
 	async onWhisper(user: UserIdResolvable, callback: (message: PubSubWhisperMessage) => void) {
 		return this.getUserListener(user).onWhisper(callback);
+	}
+
+	async onFollowing(user: UserIdResolvable, callback: (message: PubSubFollowingMessage) => void) {
+		return this.getUserListener(user).onFollowing(callback);
 	}
 
 	async onModAction(

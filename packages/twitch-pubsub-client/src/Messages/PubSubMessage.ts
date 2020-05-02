@@ -4,6 +4,7 @@ import PubSubChatModActionMessage, { PubSubChatModActionMessageData } from './Pu
 import PubSubRedemptionMessage, { PubSubRedemptionMessageData } from './PubSubRedemptionMessage';
 import PubSubSubscriptionMessage, { PubSubSubscriptionMessageData } from './PubSubSubscriptionMessage';
 import PubSubWhisperMessage, { PubSubWhisperMessageData } from './PubSubWhisperMessage';
+import PubSubFollowingMessage, { PubSubFollowingMessageData } from './PubSubFollowingMessage';
 
 export interface PubSubBasicMessageInfo {
 	user_name: string;
@@ -35,7 +36,8 @@ type PubSubMessageData =
 	| PubSubChatModActionMessageData
 	| PubSubRedemptionMessageData
 	| PubSubSubscriptionMessageData
-	| PubSubWhisperMessageData;
+	| PubSubWhisperMessageData
+	| PubSubFollowingMessageData;
 export { PubSubMessageData };
 
 type PubSubMessage =
@@ -44,5 +46,6 @@ type PubSubMessage =
 	| PubSubChatModActionMessage
 	| PubSubRedemptionMessage
 	| PubSubSubscriptionMessage
-	| PubSubWhisperMessage;
+	| PubSubWhisperMessage
+	| PubSubFollowingMessage;
 export default PubSubMessage;
